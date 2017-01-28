@@ -15,14 +15,14 @@ var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
 var capacityOptions = capacity.querySelectorAll('#capacity option');
 
-pins.forEach(function (item, i, pins) {
+pins.forEach(function (item, i) {
   item.addEventListener('click', function () {
     pinActive.classList.remove('pin--active');
     item.classList.add('pin--active');
     dialog.classList.add('invisible');
     pinActive = item;
     dialog.classList.remove('invisible');
-  })
+  });
 });
 
 close.addEventListener('click', function () {
@@ -32,76 +32,76 @@ close.addEventListener('click', function () {
 
 // Зависимость полей время выезда и время заезда
 checkInTime.addEventListener('change', function () {
-  checkInTimeOptions.forEach(function(item, i, checkInTimeOptions) {
+  checkInTimeOptions.forEach(function (item, i) {
     if (checkInTimeOptions[i].selected) {
       var value = checkInTimeOptions[i].getAttribute('value');
-    };
+    }
     if (value) {
       checkOutTimeOptions[i].selected = true;
     }
-  })
+  });
 });
 
 checkOutTime.addEventListener('change', function () {
-  checkOutTimeOptions.forEach(function (item, i, checkOutTimeOptions) {
+  checkOutTimeOptions.forEach(function (item, i) {
     if (checkOutTimeOptions[i].selected) {
       var value = checkOutTimeOptions[i].getAttribute('value');
-    };
+    }
     if (value) {
       checkInTimeOptions[i].selected = true;
     }
-  })
+  });
 });
 
 // Зависимость минимальной цены от типа жилья и наоборот
 typeOfHouse.addEventListener('change', function () {
-  typeOfHouseOptions.forEach(function (item, i, typeOfHouseOptions) {
+  typeOfHouseOptions.forEach(function (item, i) {
     if (typeOfHouseOptions[i].selected) {
       var value = typeOfHouseOptions[i].getAttribute('value');
-    };
-    if (value === "apartaments") {
+    }
+    if (value === 'apartaments') {
       minPrice.setAttribute('value', 1000);
-    } else if (value === "bad-house") {
+    } else if (value === 'bad-house') {
       minPrice.setAttribute('value', 0);
-    } else if (value === "palace") {
+    } else if (value === 'palace') {
       minPrice.setAttribute('value', 10000);
     }
-  })
- });
+  });
+});
 
 minPrice.addEventListener('keyup', function () {
-  if (minPrice.value === "0") {
+  if (minPrice.value === '0') {
     typeOfHouseOptions[1].selected = true;
-  } else if (minPrice.value === "1000") {
+  } else if (minPrice.value === '1000') {
     typeOfHouseOptions[0].selected = true;
-  } else if (minPrice.value === "10000") {
+  } else if (minPrice.value === '10000') {
     typeOfHouseOptions[2].selected = true;
   }
- });
+});
 
 // Зависимость количества гостей и комнат
 roomNumber.addEventListener('change', function () {
-  roomNumberOptions.forEach(function(item, i, roomNumberOptions) {
+  roomNumberOptions.forEach(function (item, i) {
     if (roomNumberOptions[i].selected) {
       var value = roomNumberOptions[i].getAttribute('value');
-    };
+    }
     if (value === '2' || value === '3') {
       capacityOptions[0].selected = true;
-    } else if (value === '1'){
+    } else if (value === '1') {
       capacityOptions[1].selected = true;
     }
-  })
+  });
 });
 
 capacity.addEventListener('change', function () {
-  capacityOptions.forEach(function(item, i, capacityOptions) {
+  capacityOptions.forEach(function (item, i) {
     if (capacityOptions[i].selected) {
       var value = capacityOptions[i].getAttribute('value');
-    };
+    }
     if (value === '3') {
       roomNumberOptions[1].selected = true;
-    } else if (value === '0'){
+    } else if (value === '0') {
       roomNumberOptions[0].selected = true;
     }
-  })
+  });
 });
