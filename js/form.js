@@ -15,15 +15,19 @@ var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
 var capacityOptions = capacity.querySelectorAll('#capacity option');
 
-pins.forEach(function (item, i) {
+function pinClick(item) {
   item.addEventListener('click', function () {
     pinActive.classList.remove('pin--active');
     item.classList.add('pin--active');
     dialog.classList.add('invisible');
     pinActive = item;
     dialog.classList.remove('invisible');
-  });
-});
+  })
+};
+
+for (var i = 0; i < pins.length; i++) {
+  pinClick(pins.item(i));
+};
 
 close.addEventListener('click', function () {
   dialog.classList.add('invisible');
@@ -32,76 +36,62 @@ close.addEventListener('click', function () {
 
 // Зависимость полей время выезда и время заезда
 checkInTime.addEventListener('change', function () {
-  checkInTimeOptions.forEach(function (item, i) {
-    if (checkInTimeOptions[i].selected) {
-      var value = checkInTimeOptions[i].getAttribute('value');
-    }
-    if (value) {
-      checkOutTimeOptions[i].selected = true;
-    }
-  });
+  var index = checkInTime.selectedIndex;
+  checkOutTimeOptions[index].selected = true;
 });
 
 checkOutTime.addEventListener('change', function () {
-  checkOutTimeOptions.forEach(function (item, i) {
-    if (checkOutTimeOptions[i].selected) {
-      var value = checkOutTimeOptions[i].getAttribute('value');
-    }
-    if (value) {
-      checkInTimeOptions[i].selected = true;
-    }
-  });
+  var index = checkOutTime.selectedIndex;
+  checkInTimeOptions[index].selected = true;
 });
 
 // Зависимость минимальной цены от типа жилья и наоборот
 typeOfHouse.addEventListener('change', function () {
-  typeOfHouseOptions.forEach(function (item, i) {
-    if (typeOfHouseOptions[i].selected) {
-      var value = typeOfHouseOptions[i].getAttribute('value');
-    }
-    if (value === 'apartaments') {
-      minPrice.setAttribute('value', 1000);
-    } else if (value === 'bad-house') {
-      minPrice.setAttribute('value', 0);
-    } else if (value === 'palace') {
-      minPrice.setAttribute('value', 10000);
-    }
-  });
+  var index = typeOfHouse.selectedIndex;
+  if (index === 0) {
+    minPrice.setAttribute('value', 1000);
+  } else if (index === 1) {
+    minPrice.setAttribute('value', 0);
+  } else {
+    minPrice.setAttribute('value', 10000);
+  };
 });
 
 minPrice.addEventListener('keyup', function () {
-  if (minPrice.value === '0') {
+  if (parseInt(minPrice.value) < 1000) {
     typeOfHouseOptions[1].selected = true;
-  } else if (minPrice.value === '1000') {
-    typeOfHouseOptions[0].selected = true;
-  } else if (minPrice.value === '10000') {
+  } else if (parseInt(minPrice.value) >= 10000) {
     typeOfHouseOptions[2].selected = true;
+  } else {
+    typeOfHouseOptions[0].selected = true;
+  }
+});
+
+minPrice.addEventListener('click', function () {
+  if (parseInt(minPrice.value) < 1000) {
+    typeOfHouseOptions[1].selected = true;
+  } else if (parseInt(minPrice.value) >= 10000) {
+    typeOfHouseOptions[2].selected = true;
+  } else {
+    typeOfHouseOptions[0].selected = true;
   }
 });
 
 // Зависимость количества гостей и комнат
 roomNumber.addEventListener('change', function () {
-  roomNumberOptions.forEach(function (item, i) {
-    if (roomNumberOptions[i].selected) {
-      var value = roomNumberOptions[i].getAttribute('value');
-    }
-    if (value === '2' || value === '3') {
-      capacityOptions[0].selected = true;
-    } else if (value === '1') {
-      capacityOptions[1].selected = true;
-    }
-  });
+  var index = roomNumber.selectedIndex;
+  if (index === 0) {
+    capacityOptions[1].selected = true;
+  } else {
+    capacityOptions[0].selected = true;
+  }
 });
 
 capacity.addEventListener('change', function () {
-  capacityOptions.forEach(function (item, i) {
-    if (capacityOptions[i].selected) {
-      var value = capacityOptions[i].getAttribute('value');
-    }
-    if (value === '3') {
-      roomNumberOptions[1].selected = true;
-    } else if (value === '0') {
-      roomNumberOptions[0].selected = true;
-    }
-  });
+  var index = capacity.selectedIndex;
+  if (index === 1) {
+    roomNumberOptions[0].selected = true;
+  } else {
+    roomNumberOptions[1].selected = true;
+  }
 });
