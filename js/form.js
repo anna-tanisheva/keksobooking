@@ -22,12 +22,12 @@ function pinClick(item) {
     dialog.classList.add('invisible');
     pinActive = item;
     dialog.classList.remove('invisible');
-  })
-};
+  });
+}
 
 for (var i = 0; i < pins.length; i++) {
   pinClick(pins.item(i));
-};
+}
 
 close.addEventListener('click', function () {
   dialog.classList.add('invisible');
@@ -54,13 +54,13 @@ typeOfHouse.addEventListener('change', function () {
     minPrice.setAttribute('value', 0);
   } else {
     minPrice.setAttribute('value', 10000);
-  };
+  }
 });
 
 minPrice.addEventListener('keyup', function () {
-  if (parseInt(minPrice.value) < 1000) {
+  if (parseInt(minPrice.value, 10) < 1000) {
     typeOfHouseOptions[1].selected = true;
-  } else if (parseInt(minPrice.value) >= 10000) {
+  } else if (parseInt(minPrice.value, 10) >= 10000) {
     typeOfHouseOptions[2].selected = true;
   } else {
     typeOfHouseOptions[0].selected = true;
@@ -68,9 +68,9 @@ minPrice.addEventListener('keyup', function () {
 });
 
 minPrice.addEventListener('click', function () {
-  if (parseInt(minPrice.value) < 1000) {
+  if (parseInt(minPrice.value, 10) < 1000) {
     typeOfHouseOptions[1].selected = true;
-  } else if (parseInt(minPrice.value) >= 10000) {
+  } else if (parseInt(minPrice.value, 10) >= 10000) {
     typeOfHouseOptions[2].selected = true;
   } else {
     typeOfHouseOptions[0].selected = true;
