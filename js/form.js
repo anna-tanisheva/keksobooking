@@ -3,6 +3,8 @@ var pins = document.querySelectorAll('.pin');
 var pinActive = document.querySelector('.pin.pin--active');
 var dialog = document.querySelector('.dialog');
 var close = dialog.querySelector('.dialog__close');
+var title = document.querySelector('#title');
+var address = document.querySelector('#address');
 var checkInTime = document.querySelector('#time');
 var checkInTimeOptions = checkInTime.querySelectorAll('#time option');
 var checkOutTime = document.querySelector('#timeout');
@@ -33,6 +35,18 @@ close.addEventListener('click', function () {
   dialog.classList.add('invisible');
   pinActive.classList.remove('pin--active');
 });
+
+// Валидация формы
+title.setAttribute('required', true);
+title.setAttribute('minlength', 30);
+title.setAttribute('maxlength', 100);
+
+minPrice.setAttribute('required', true);
+minPrice.setAttribute('type', 'number');
+minPrice.setAttribute('min', 1000);
+minPrice.setAttribute('max', 1000000);
+
+address.setAttribute('required', true);
 
 // Зависимость полей время выезда и время заезда
 checkInTime.addEventListener('change', function () {
@@ -95,3 +109,4 @@ capacity.addEventListener('change', function () {
     roomNumberOptions[1].selected = true;
   }
 });
+
