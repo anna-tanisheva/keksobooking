@@ -16,7 +16,7 @@ var roomNumber = document.querySelector('#room_number');
 var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
 var capacityOptions = capacity.querySelectorAll('#capacity option');
-var form = document.querySelector('.notice__form');
+var formToValidate = document.querySelector('.notice__form');
 
 function pinClick(item) {
   item.addEventListener('click', function () {
@@ -61,7 +61,7 @@ var validate = function (form) {
   resetError(form);
   if (!title.value || title.value.length < 30 || title.value.length > 100) {
     showError(form,
-      'Заголовок - обязательное для заполнения поле, длина сообщения - не менее 30 и не более 100 символов, сейчас '
+        'Заголовок - обязательное для заполнения поле, длина сообщения - не менее 30 и не более 100 символов, сейчас '
        + title.value.length);
     title.classList.add('error');
     return false;
@@ -77,7 +77,7 @@ var validate = function (form) {
   resetError(form);
   if (!minPrice.value || minPrice.value < 1000 || minPrice.value > 1000000) {
     showError(form,
-      'Цена за ночь - обязательное для заполнения поле, минимальная цена - 1.000, максимальная - 1.000.000');
+        'Цена за ночь - обязательное для заполнения поле, минимальная цена - 1.000, максимальная - 1.000.000');
     minPrice.classList.add('error');
     return false;
   }
@@ -86,7 +86,7 @@ var validate = function (form) {
 };
 
 form.addEventListener('submit', function (evt) {
-  if (!validate(form)) {
+  if (!validate(formToValidate)) {
     evt.preventDefault();
   }
 });
