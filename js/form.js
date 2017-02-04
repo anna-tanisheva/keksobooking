@@ -85,7 +85,7 @@ var validate = function (form) {
   return true;
 };
 
-form.addEventListener('submit', function (evt) {
+formToValidate.addEventListener('submit', function (evt) {
   if (!validate(formToValidate)) {
     evt.preventDefault();
   }
