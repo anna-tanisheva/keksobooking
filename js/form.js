@@ -42,19 +42,32 @@ minPrice.setAttribute('type', 'number');
 minPrice.setAttribute('min', '1000');
 minPrice.setAttribute('max', '1000000');
 
-var showError = function (container, errorMessage) {
+var showError = function (container, node) {
   container.classList.add('error');
-  var msgElem = document.createElement('span');
-  msgElem.classList.add('error-message'); //
-  msgElem.innerHTML += errorMessage;
-  container.appendChild(msgElem);
+  var msgElemAll = container.querySelectorAll('.error-message');
+  var msgElem = null;
+  if (node === title) {
+    msgElem = msgElemAll[0];
+  } else if (node === address) {
+    msgElem = msgElemAll[1];
+  } else {
+    msgElem = msgElemAll[2]
+  }
+  msgElem.classList.remove('invisible');
 };
 
 var resetError = function (container) {
   container.classList.remove('error');
-  if (container.lastChild.className === 'error-message') {
-    container.removeChild(container.lastChild);//
-  }
+  var elems = container.querySelectorAll('span.error-message');
+  for (var i = 0; i < elems.length; i++) {
+    if (!elems[i].classList.contains('invisible')) {
+      elems[i].classList.add('invisible');
+    }
+  };
+  var inputArray = container.querySelectorAll('input');
+    for (var j = 0; j < inputArray.length; j++) {
+      inputArray[j].classList.remove('error');
+    };
 };
 
 var validate = function (evt) {
@@ -65,26 +78,19 @@ var validate = function (evt) {
   resetError(form);
 
   if (!title.value || title.value.length < 30 || title.value.length > 100) {
-    showError(form,
-        'Заголовок - обязательное для заполнения поле, длина сообщения - не менее 30 и не более 100 символов, сейчас '
-       + title.value.length);
+    showError(form, title);
     title.classList.add('error');
     return false;
   }
 
-  resetError(form);
-
   if (!address.value) {
-    showError(form, 'Адрес - обязательное для заполнения поле');
+    showError(form, address);
     address.classList.add('error');
     return false;
   }
 
-  resetError(form);
-
   if (!minPrice.value || minPrice.value < 1000 || minPrice.value > 1000000) {
-    showError(form,
-        'Цена за ночь - обязательное для заполнения поле, минимальная цена - 1.000, максимальная - 1.000.000');
+    showError(form, minPrice);
     minPrice.classList.add('error');
     return false;
   }
