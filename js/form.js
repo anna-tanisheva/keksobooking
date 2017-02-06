@@ -51,7 +51,7 @@ var showError = function (container, node) {
   } else if (node === address) {
     msgElem = msgElemAll[1];
   } else {
-    msgElem = msgElemAll[2]
+    msgElem = msgElemAll[2];
   }
   msgElem.classList.remove('invisible');
 };
@@ -59,15 +59,15 @@ var showError = function (container, node) {
 var resetError = function (container) {
   container.classList.remove('error');
   var elems = container.querySelectorAll('span.error-message');
-  for (var i = 0; i < elems.length; i++) {
-    if (!elems[i].classList.contains('invisible')) {
-      elems[i].classList.add('invisible');
+  for (var z = 0; z < elems.length; z++) {
+    if (!elems[z].classList.contains('invisible')) {
+      elems[z].classList.add('invisible');
     }
-  };
+  }
   var inputArray = container.querySelectorAll('input');
-    for (var j = 0; j < inputArray.length; j++) {
-      inputArray[j].classList.remove('error');
-    };
+  for (var j = 0; j < inputArray.length; j++) {
+    inputArray[j].classList.remove('error');
+  }
 };
 
 var validate = function (evt) {
