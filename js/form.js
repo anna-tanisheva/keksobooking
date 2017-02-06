@@ -88,7 +88,9 @@ var validate = function (evt) {
     minPrice.classList.add('error');
     return false;
   }
+
   form.submit();
+  return true;
 };
 
 formToValidate.addEventListener('submit', validate);
@@ -117,7 +119,7 @@ typeOfHouse.addEventListener('change', function () {
 });
 
 var checkPrice = function () {
-    if (parseInt(minPrice.value, 10) < 1000) {
+  if (parseInt(minPrice.value, 10) < 1000) {
     typeOfHouseOptions[1].selected = true;
   } else if (parseInt(minPrice.value, 10) >= 10000) {
     typeOfHouseOptions[2].selected = true;
