@@ -44,29 +44,22 @@ minPrice.setAttribute('max', '1000000');
 
 var showError = function (container, node) {
   container.classList.add('error');
-  var msgElemAll = container.querySelectorAll('.error-message');
-  var msgElem = null;
-  if (node === title) {
-    msgElem = msgElemAll[0];
-  } else if (node === address) {
-    msgElem = msgElemAll[1];
-  } else {
-    msgElem = msgElemAll[2];
-  }
+  var nodeName = node.getAttribute('id');
+  var msgElem = container.querySelector('.' + nodeName);
   msgElem.classList.remove('invisible');
 };
 
 var resetError = function (container) {
   container.classList.remove('error');
-  var elems = container.querySelectorAll('span.error-message');
-  for (var z = 0; z < elems.length; z++) {
-    if (!elems[z].classList.contains('invisible')) {
-      elems[z].classList.add('invisible');
-    }
+  var nodeList = [title, address, minPrice];
+  for (var i = 0; i < nodeList.length; i++) {
+    nodeList[i].classList.remove('error');
   }
-  var inputArray = container.querySelectorAll('input');
-  for (var j = 0; j < inputArray.length; j++) {
-    inputArray[j].classList.remove('error');
+  var message = container.querySelectorAll('span.error-message');
+  for (var i = 0; i < message.length; i++) {
+    if (!message[i].classList.contains('invisible')) {
+      message[i].classList.add('invisible');
+    }
   }
 };
 
@@ -90,7 +83,7 @@ var validate = function (evt) {
   }
 
   if (!minPrice.value || minPrice.value < 1000 || minPrice.value > 1000000) {
-    showError(form, minPrice);
+    showError(form, price);
     minPrice.classList.add('error');
     return false;
   }
