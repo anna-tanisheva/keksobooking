@@ -11,7 +11,7 @@ var checkOutTime = document.querySelector('#timeout');
 var checkOutTimeOptions = checkOutTime.querySelectorAll('#timeout option');
 var typeOfHouse = document.querySelector('#type');
 var typeOfHouseOptions = typeOfHouse.querySelectorAll('#type option');
-var minPrice = document.querySelector('#price');
+var price = document.querySelector('#price');
 var roomNumber = document.querySelector('#room_number');
 var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
@@ -38,9 +38,9 @@ close.addEventListener('click', function () {
 
 // Валидация формы
 
-minPrice.setAttribute('type', 'number');
-minPrice.setAttribute('min', '1000');
-minPrice.setAttribute('max', '1000000');
+price.setAttribute('type', 'number');
+price.setAttribute('min', '1000');
+price.setAttribute('max', '1000000');
 
 var showError = function (container, node) {
   container.classList.add('error');
@@ -51,14 +51,14 @@ var showError = function (container, node) {
 
 var resetError = function (container) {
   container.classList.remove('error');
-  var nodeList = [title, address, minPrice];
-  for (var i = 0; i < nodeList.length; i++) {
-    nodeList[i].classList.remove('error');
+  var nodeList = [title, address, price];
+  for (var z = 0; z < nodeList.length; z++) {
+    nodeList[z].classList.remove('error');
   }
   var message = container.querySelectorAll('span.error-message');
-  for (var i = 0; i < message.length; i++) {
-    if (!message[i].classList.contains('invisible')) {
-      message[i].classList.add('invisible');
+  for (var j = 0; j < message.length; j++) {
+    if (!message[j].classList.contains('invisible')) {
+      message[j].classList.add('invisible');
     }
   }
 };
@@ -82,9 +82,9 @@ var validate = function (evt) {
     return false;
   }
 
-  if (!minPrice.value || minPrice.value < 1000 || minPrice.value > 1000000) {
+  if (!price.value || price.value < 1000 || price.value > 1000000) {
     showError(form, price);
-    minPrice.classList.add('error');
+    price.classList.add('error');
     return false;
   }
 
@@ -109,27 +109,27 @@ checkOutTime.addEventListener('change', function () {
 typeOfHouse.addEventListener('change', function () {
   var index = typeOfHouse.selectedIndex;
   if (index === 0) {
-    minPrice.setAttribute('value', 1000);
+    price.setAttribute('value', 1000);
   } else if (index === 1) {
-    minPrice.setAttribute('value', 0);
+    price.setAttribute('value', 0);
   } else {
-    minPrice.setAttribute('value', 10000);
+    price.setAttribute('value', 10000);
   }
 });
 
 var checkPrice = function () {
-  if (parseInt(minPrice.value, 10) < 1000) {
+  if (parseInt(price.value, 10) < 1000) {
     typeOfHouseOptions[1].selected = true;
-  } else if (parseInt(minPrice.value, 10) >= 10000) {
+  } else if (parseInt(price.value, 10) >= 10000) {
     typeOfHouseOptions[2].selected = true;
   } else {
     typeOfHouseOptions[0].selected = true;
   }
 };
 
-minPrice.addEventListener('keyup', checkPrice);
+price.addEventListener('keyup', checkPrice);
 
-minPrice.addEventListener('click', checkPrice);
+price.addEventListener('click', checkPrice);
 
 // Зависимость количества гостей и комнат
 roomNumber.addEventListener('change', function () {
