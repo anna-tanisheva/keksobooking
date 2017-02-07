@@ -651,3 +651,16 @@ select option:hover {
 .rounded {
     border-radius: 50%;
 }
+
+.invisible {
+    display: none;
+}
+
+input[type=text].error, input[type=number].error  {
+  border-color: #e63614;
+}
+
+.error-message {
+  color: #e63614;
+  font-weight: 600;
+}
