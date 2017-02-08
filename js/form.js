@@ -1,5 +1,4 @@
 'use strict';
-var pins = document.querySelectorAll('.pin');
 var pinActive = document.querySelector('.pin.pin--active');
 var dialog = document.querySelector('.dialog');
 var close = dialog.querySelector('.dialog__close');
@@ -20,22 +19,21 @@ var formToValidate = document.querySelector('.notice__form');
 var map = document.querySelector('div.tokyo__pin-map');
 
 var ENTER_KEY_CODE = 13;
-var ESCAPE_KEY_CODE = 27;
 
 // Открытие-закрытие диалога
-function openDialog (item) {
+function openDialog(item) {
   pinActive.classList.remove('pin--active');
   item.classList.add('pin--active');
   pinActive = item;
   dialog.classList.remove('invisible');
   item.setAttribute('aria-pressed', true);
-};
+}
 
-function closeDialog () {
+function closeDialog() {
   dialog.classList.add('invisible');
   pinActive.classList.remove('pin--active');
   pinActive.setAttribute('aria-pressed', false);
-};
+}
 
 map.addEventListener('click', function (evt) {
   var target = evt.target.parentNode;
