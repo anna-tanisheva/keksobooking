@@ -1,5 +1,4 @@
 'use strict';
-var pins = document.querySelectorAll('.pin');
 var pinActive = document.querySelector('.pin.pin--active');
 var dialog = document.querySelector('.dialog');
 var close = dialog.querySelector('.dialog__close');
@@ -17,27 +16,48 @@ var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
 var capacityOptions = capacity.querySelectorAll('#capacity option');
 var formToValidate = document.querySelector('.notice__form');
+var map = document.querySelector('div.tokyo__pin-map');
 
-function pinClick(item) {
-  item.addEventListener('click', function () {
-    pinActive.classList.remove('pin--active');
-    item.classList.add('pin--active');
-    pinActive = item;
-    dialog.classList.remove('invisible');
-  });
+var ENTER_KEY_CODE = 13;
+
+// Открытие-закрытие диалога
+function openDialog(item) {
+  pinActive.classList.remove('pin--active');
+  item.classList.add('pin--active');
+  pinActive = item;
+  dialog.classList.remove('invisible');
+  item.setAttribute('aria-pressed', true);
 }
 
-for (var i = 0; i < pins.length; i++) {
-  pinClick(pins.item(i));
-}
-
-close.addEventListener('click', function () {
+function closeDialog() {
   dialog.classList.add('invisible');
   pinActive.classList.remove('pin--active');
+  pinActive.setAttribute('aria-pressed', false);
+}
+
+map.addEventListener('click', function (evt) {
+  var target = evt.target.parentNode;
+  openDialog(target);
+});
+
+map.addEventListener('keydown', function (evt) {
+  if (evt && evt.keyCode === ENTER_KEY_CODE) {
+    var target = evt.target;
+    openDialog(target);
+  }
+});
+
+close.addEventListener('click', function () {
+  closeDialog();
+});
+
+close.addEventListener('keydown', function (evt) {
+  if (evt && evt.keyCode === ENTER_KEY_CODE) {
+    closeDialog();
+  }
 });
 
 // Валидация формы
-
 price.setAttribute('type', 'number');
 price.setAttribute('min', '1000');
 price.setAttribute('max', '1000000');
