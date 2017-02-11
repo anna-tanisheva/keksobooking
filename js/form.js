@@ -3,11 +3,6 @@
 var title = document.querySelector('#title');
 var address = document.querySelector('#address');
 
-
-var roomNumber = document.querySelector('#room_number');
-var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
-var capacity = document.querySelector('#capacity');
-var capacityOptions = capacity.querySelectorAll('#capacity option');
 var formToValidate = document.querySelector('.notice__form');
 var price = document.querySelector('#price');
 
@@ -117,7 +112,7 @@ price.addEventListener('keyup', checkPrice);
 
 price.addEventListener('click', checkPrice);
 
-//Зависимость количества гостей и комнат
+// Зависимость количества гостей и комнат
 var roomNumber = document.querySelector('#room_number');
 var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
@@ -127,8 +122,8 @@ var valuesOfRoomNumber = getValuesArray(roomNumberOptions);
 var valuesOfCapacity = getValuesArray(capacityOptions).reverse();
 
 var checkArrayLength = function (array) {
-  array.push(array[array.length-1]);
-}
+  array.push(array[array.length - 1]);
+};
 
 if (valuesOfCapacity.length < valuesOfRoomNumber.length) {
   checkArrayLength(valuesOfCapacity);

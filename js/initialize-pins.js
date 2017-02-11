@@ -1,6 +1,6 @@
 'use strict';
 
-var initializePins = function () {
+window.initializePins = function () {
 
   var pinActive = document.querySelector('.pin.pin--active');
   var dialog = document.querySelector('.dialog');
