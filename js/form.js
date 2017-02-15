@@ -79,7 +79,6 @@ window.synchronizeFields(checkOutTime, checkInTime, valuesCheckOut, valuesCheckI
 
 // Зависимость минимальной цены от типа жилья
 var typeOfHouse = document.querySelector('#type');
-var typeOfHouseOptions = document.querySelectorAll('#type option')
 
 var valuesOfHouse = ['apartaments', 'bad-house', 'palace'];
 var minPrice = [1000, 0, 10000];
@@ -92,7 +91,7 @@ var roomNumber = document.querySelector('#room_number');
 var capacity = document.querySelector('#capacity');
 
 var valuesOfRoomNumber = ['1', '2', '3'];
-var valuesOfCapacity = ['0', '3', '3']
+var valuesOfCapacity = ['0', '3', '3'];
 
 window.synchronizeFields(roomNumber, capacity, valuesOfRoomNumber, valuesOfCapacity, 'value');
 window.synchronizeFields(capacity, roomNumber, valuesOfCapacity, valuesOfRoomNumber, 'value');
