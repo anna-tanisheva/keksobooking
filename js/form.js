@@ -68,68 +68,31 @@ formToValidate.addEventListener('submit', validate);
 
 // Зависимость полей время выезда и время заезда
 var checkInTime = document.querySelector('#time');
-var checkInTimeOptions = checkInTime.querySelectorAll('#time option');
 var checkOutTime = document.querySelector('#timeout');
-var checkOutTimeOptions = checkOutTime.querySelectorAll('#timeout option');
 
-var getValuesArray = function (nodeList) {
-  var valuesArray = [];
-  for (var i = 0; i < nodeList.length; i++) {
-    var value = nodeList[i].getAttribute('value');
-    valuesArray.push(value);
-  }
-  return valuesArray;
-};
+var valuesCheckIn = ['12', '13', '14'];
 
-var valuesCheckIn = getValuesArray(checkInTimeOptions);
-
-var valuesCheckOut = getValuesArray(checkOutTimeOptions);
+var valuesCheckOut = ['12', '13', '14'];
 
 window.synchronizeFields(checkInTime, checkOutTime, valuesCheckIn, valuesCheckOut, 'value');
 window.synchronizeFields(checkOutTime, checkInTime, valuesCheckOut, valuesCheckIn, 'value');
 
 // Зависимость минимальной цены от типа жилья
 var typeOfHouse = document.querySelector('#type');
-var typeOfHouseOptions = typeOfHouse.querySelectorAll('#type option');
+var typeOfHouseOptions = document.querySelectorAll('#type option')
 
-var valuesOfHouse = getValuesArray(typeOfHouseOptions);
+var valuesOfHouse = ['apartaments', 'bad-house', 'palace'];
 var minPrice = [1000, 0, 10000];
 
+window.synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, 'min');
 window.synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, 'value');
-
-// Обратная зависимость (типа жилья от цены)
-var checkPrice = function () {
-  if (parseInt(price.value, 10) < 1000) {
-    typeOfHouseOptions[1].selected = true;
-  } else if (parseInt(price.value, 10) >= 10000) {
-    typeOfHouseOptions[2].selected = true;
-  } else {
-    typeOfHouseOptions[0].selected = true;
-  }
-};
-
-price.addEventListener('keyup', checkPrice);
-
-price.addEventListener('click', checkPrice);
 
 // Зависимость количества гостей и комнат
 var roomNumber = document.querySelector('#room_number');
-var roomNumberOptions = roomNumber.querySelectorAll('#room_number option');
 var capacity = document.querySelector('#capacity');
-var capacityOptions = capacity.querySelectorAll('#capacity option');
 
-var valuesOfRoomNumber = getValuesArray(roomNumberOptions);
-var valuesOfCapacity = getValuesArray(capacityOptions).reverse();
-
-var checkArrayLength = function (array) {
-  array.push(array[array.length - 1]);
-};
-
-if (valuesOfCapacity.length < valuesOfRoomNumber.length) {
-  checkArrayLength(valuesOfCapacity);
-} else if (valuesOfCapacity.length > valuesOfRoomNumber.length) {
-  checkArrayLength(valuesOfRoomNumber);
-}
+var valuesOfRoomNumber = ['1', '2', '3'];
+var valuesOfCapacity = ['0', '3', '3']
 
 window.synchronizeFields(roomNumber, capacity, valuesOfRoomNumber, valuesOfCapacity, 'value');
 window.synchronizeFields(capacity, roomNumber, valuesOfCapacity, valuesOfRoomNumber, 'value');
