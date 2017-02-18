@@ -24,14 +24,14 @@ window.initializePins = (function () {
   }
 
   return {
-    mapHandlerClick : function () {
+    mapHandlerClick: function () {
       map.addEventListener('click', function (evt) {
         var target = evt.target.parentNode;
         openDialog(target);
       });
     },
 
-    mapHandlerKeydown : function () {
+    mapHandlerKeydown: function () {
       map.addEventListener('keydown', function (evt) {
         if (evt && evt.keyCode === ENTER_KEY_CODE) {
           var target = evt.target;
@@ -40,18 +40,18 @@ window.initializePins = (function () {
       });
     },
 
-    closeClick : function () {
+    closeClick: function () {
       close.addEventListener('click', function () {
         closeDialog();
       });
     },
 
-    closeKeydown : function () {
+    closeKeydown: function () {
       close.addEventListener('keydown', function (evt) {
         if (evt && evt.keyCode === ENTER_KEY_CODE) {
-        closeDialog();
+          closeDialog();
         }
       });
     }
   };
-}) ();
+})();

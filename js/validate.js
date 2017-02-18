@@ -1,3 +1,5 @@
+'use strict';
+
 window.validation = function () {
   var title = document.querySelector('#title');
   var address = document.querySelector('#address');
@@ -37,7 +39,6 @@ window.validation = function () {
 
     if (!title.value || title.value.length < 30 || title.value.length > 100) {
       showError(form, title);
-      console.log(title.value.length);
       title.classList.add('error');
       return false;
     }
@@ -59,4 +60,4 @@ window.validation = function () {
   };
 
   return (formToValidate.addEventListener('submit', validate));
-}
+};
