@@ -1,6 +1,6 @@
 'use strict';
 
-window.initializePins = function () {
+window.initializePins = (function () {
 
   var pinActive = document.querySelector('.pin.pin--active');
   var dialog = document.querySelector('.dialog');
@@ -23,25 +23,35 @@ window.initializePins = function () {
     pinActive.setAttribute('aria-pressed', false);
   }
 
-  map.addEventListener('click', function (evt) {
-    var target = evt.target.parentNode;
-    openDialog(target);
-  });
+  return {
+    mapHandlerClick: function () {
+      map.addEventListener('click', function (evt) {
+        var target = evt.target.parentNode;
+        openDialog(target);
+      });
+    },
 
-  map.addEventListener('keydown', function (evt) {
-    if (evt && evt.keyCode === ENTER_KEY_CODE) {
-      var target = evt.target;
-      openDialog(target);
+    mapHandlerKeydown: function () {
+      map.addEventListener('keydown', function (evt) {
+        if (evt && evt.keyCode === ENTER_KEY_CODE) {
+          var target = evt.target;
+          openDialog(target);
+        }
+      });
+    },
+
+    closeClick: function () {
+      close.addEventListener('click', function () {
+        closeDialog();
+      });
+    },
+
+    closeKeydown: function () {
+      close.addEventListener('keydown', function (evt) {
+        if (evt && evt.keyCode === ENTER_KEY_CODE) {
+          closeDialog();
+        }
+      });
     }
-  });
-
-  close.addEventListener('click', function () {
-    closeDialog();
-  });
-
-  close.addEventListener('keydown', function (evt) {
-    if (evt && evt.keyCode === ENTER_KEY_CODE) {
-      closeDialog();
-    }
-  });
-};
+  };
+})();
