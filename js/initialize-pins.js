@@ -3,14 +3,11 @@
 window.initializePins = (function () {
 
   var map = document.querySelector('div.tokyo__pin-map');
+  var close = dialog.querySelector('.dialog__close');
 
   var ENTER_KEY_CODE = 13;
 
-  window.curTarget;
-
-  var obj = {};
-
-  return obj = {
+  var obj = {
     callBack: null,
 
     curTarget: null,
@@ -30,7 +27,7 @@ window.initializePins = (function () {
           obj.curTarget = target;
           obj.callBack = function () {
             obj.curTarget.focus();
-          }
+          };
         }
       });
     },
@@ -55,4 +52,6 @@ window.initializePins = (function () {
       });
     }
   };
+
+  return obj;
 })();

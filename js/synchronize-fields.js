@@ -15,7 +15,7 @@ window.useFields = function () {
       for (var j = 0; j < valuesArray1.length; j++) {
         if (node1.value === valuesArray1[j]) {
           functionName(node2, valuesArray2[j]);
-        };
+        }
       }
     });
   };

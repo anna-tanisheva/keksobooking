@@ -2,7 +2,7 @@
 
 var pinActive = document.querySelector('.pin.pin--active');
 var dialog = document.querySelector('.dialog');
-var close = dialog.querySelector('.dialog__close');
+
 
 window.showCard = function (item) {
   pinActive.classList.remove('pin--active');
