@@ -3,7 +3,7 @@
 window.initializePins = (function () {
 
   var map = document.querySelector('div.tokyo__pin-map');
-  var close = dialog.querySelector('.dialog__close');
+  var close = document.querySelector('.dialog__close');
 
   var ENTER_KEY_CODE = 13;
 
