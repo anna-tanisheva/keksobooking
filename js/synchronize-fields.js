@@ -2,11 +2,19 @@
 
 window.useFields = function () {
 
-  var synchronizeFields = function (node1, node2, valuesArray1, valuesArray2, propertyName) {
+  var syncValues = function (element, value) {
+    element.value = value;
+  };
+
+  var syncMin = function (element, value) {
+    element.min = value;
+  };
+
+  var synchronizeFields = function (node1, node2, valuesArray1, valuesArray2, functionName) {
     node1.addEventListener('change', function () {
       for (var j = 0; j < valuesArray1.length; j++) {
         if (node1.value === valuesArray1[j]) {
-          node2[propertyName] = valuesArray2[j];
+          functionName(node2, valuesArray2[j]);
         }
       }
     });
@@ -27,12 +35,12 @@ window.useFields = function () {
   var valuesOfRoomNumber = ['1', '2', '3'];
   var valuesOfCapacity = ['0', '3', '3'];
 
-  synchronizeFields(checkInTime, checkOutTime, valuesCheckIn, valuesCheckOut, 'value');
-  synchronizeFields(checkOutTime, checkInTime, valuesCheckOut, valuesCheckIn, 'value');
+  synchronizeFields(checkInTime, checkOutTime, valuesCheckIn, valuesCheckOut, syncValues);
+  synchronizeFields(checkOutTime, checkInTime, valuesCheckOut, valuesCheckIn, syncValues);
 
-  synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, 'min');
-  synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, 'value');
+  synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, syncMin);
+  synchronizeFields(typeOfHouse, price, valuesOfHouse, minPrice, syncValues);
 
-  synchronizeFields(roomNumber, capacity, valuesOfRoomNumber, valuesOfCapacity, 'value');
-  synchronizeFields(capacity, roomNumber, valuesOfCapacity, valuesOfRoomNumber, 'value');
+  synchronizeFields(roomNumber, capacity, valuesOfRoomNumber, valuesOfCapacity, syncValues);
+  synchronizeFields(capacity, roomNumber, valuesOfCapacity, valuesOfRoomNumber, syncValues);
 };

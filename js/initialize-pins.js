@@ -2,32 +2,20 @@
 
 window.initializePins = (function () {
 
-  var pinActive = document.querySelector('.pin.pin--active');
-  var dialog = document.querySelector('.dialog');
-  var close = dialog.querySelector('.dialog__close');
   var map = document.querySelector('div.tokyo__pin-map');
+  var close = document.querySelector('.dialog__close');
 
   var ENTER_KEY_CODE = 13;
 
-  function openDialog(item) {
-    pinActive.classList.remove('pin--active');
-    item.classList.add('pin--active');
-    pinActive = item;
-    dialog.classList.remove('invisible');
-    item.setAttribute('aria-pressed', true);
-  }
+  var obj = {
+    callBack: null,
 
-  function closeDialog() {
-    dialog.classList.add('invisible');
-    pinActive.classList.remove('pin--active');
-    pinActive.setAttribute('aria-pressed', false);
-  }
+    curTarget: null,
 
-  return {
     mapHandlerClick: function () {
       map.addEventListener('click', function (evt) {
         var target = evt.target.parentNode;
-        openDialog(target);
+        window.showCard(target);
       });
     },
 
@@ -35,23 +23,35 @@ window.initializePins = (function () {
       map.addEventListener('keydown', function (evt) {
         if (evt && evt.keyCode === ENTER_KEY_CODE) {
           var target = evt.target;
-          openDialog(target);
+          window.showCard(target);
+          obj.curTarget = target;
+          obj.callBack = function () {
+            obj.curTarget.focus();
+          };
         }
       });
     },
 
     closeClick: function () {
       close.addEventListener('click', function () {
-        closeDialog();
+        window.closeDialog();
+        if (typeof obj.callBack === 'function') {
+          obj.callBack();
+        }
       });
     },
 
     closeKeydown: function () {
       close.addEventListener('keydown', function (evt) {
         if (evt && evt.keyCode === ENTER_KEY_CODE) {
-          closeDialog();
+          window.closeDialog();
+          if (typeof obj.callBack === 'function') {
+            obj.callBack();
+          }
         }
       });
     }
   };
+
+  return obj;
 })();
