@@ -24,9 +24,9 @@ window.showCard = function (item, obj) {
   var features = newDialog.querySelectorAll('.feature__image');
   var featuresContainer = newDialog.querySelector('.lodge__features');
 
-  features.forEach(function(feature, index, features) {
+  features.forEach(function (feature, index) {
     var advantage = feature.classList[1].split('--')[1];
-    if (obj.offer.features.indexOf(advantage) == -1) {
+    if (obj.offer.features.indexOf(advantage) === -1) {
       featuresContainer.removeChild(feature);
     }
   });
@@ -41,15 +41,15 @@ window.showCard = function (item, obj) {
       photosContainer.appendChild(extraImg);
     }
   } else if (photos.length > obj.offer.photos.length) {
-    var difference = photos.length - obj.offer.photos.length;
-    for (var i = 0; i < difference; i++) {
+    difference = photos.length - obj.offer.photos.length;
+    for (i = 0; i < difference; i++) {
       photosContainer.removeChild(photos[i]);
     }
   }
 
   photos = photosContainer.querySelectorAll('img');
 
-  for(i = 0; i < photos.length; i++) {
+  for (i = 0; i < photos.length; i++) {
     photos[i].setAttribute('src', obj.offer.photos[i]);
   }
 

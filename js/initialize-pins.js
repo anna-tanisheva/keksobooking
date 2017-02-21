@@ -17,7 +17,7 @@ window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/
     pin.style.left = position.x + 'px';
     img.setAttribute('src', '' + similarApartments[i].author.avatar);
     pin.setAttribute('id', i);
-  };
+  }
 });
 
 window.initializePins = (function () {
@@ -49,7 +49,6 @@ window.initializePins = (function () {
             window.showCard(target, similarApartments[target.getAttribute('id')]);
           }
           initializeObject.curTarget = target;
-          console.log(initializeObject.curTarget);
           initializeObject.callBack = function () {
             initializeObject.curTarget.focus();
           };
