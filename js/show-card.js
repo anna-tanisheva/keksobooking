@@ -4,8 +4,11 @@ var pinActive = document.querySelector('.pin.pin--active');
 var dialog = document.querySelector('.dialog');
 
 
-window.showCard = function (item) {
-  pinActive.classList.remove('pin--active');
+window.showCard = function (item, obj) {
+  if (pinActive) {
+    pinActive.classList.remove('pin--active');
+  };
+
   item.classList.add('pin--active');
   pinActive = item;
   dialog.classList.remove('invisible');

@@ -1,5 +1,29 @@
 'use strict';
 
+var similarApartments = [];
+
+window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function (evt) {
+
+  similarApartments = JSON.parse(evt);
+
+  var pinTemplate = document.querySelector('#pin-template');
+  var pinMap = document.querySelector('.tokyo__pin-map');
+
+  for (var i = 0; i < 3; i++) {
+    var elementToClone = pinTemplate.content.querySelector('div.pin');
+    var pin = elementToClone.cloneNode(true);
+    var img = pin.querySelector('img');
+    pinMap.appendChild(pin);
+    var position = similarApartments[i].location;
+    pin.style.top = position.y + 'px';
+    pin.style.left = position.x + 'px';
+    img.setAttribute('src', '' + similarApartments[i].author.avatar);
+  };
+});
+
+
+
+
 window.initializePins = (function () {
 
   var map = document.querySelector('div.tokyo__pin-map');
