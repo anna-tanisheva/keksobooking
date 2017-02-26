@@ -115,7 +115,7 @@ window.initializePins = (function () {
           }
         });
 
-        similarApartments.map(function (obj) {
+        similarApartments.forEach(function (obj) {
           var parametrs = [];
           parametrs.push('' + obj.offer.type.valueOf());
           if (obj.offer.price < 10000) {
@@ -132,15 +132,15 @@ window.initializePins = (function () {
           features.forEach(function (elem, i) {
             parametrs.push(elem);
           });
-          var aaa = [];
+          var arrayToParce = [];
           filtresValues.forEach(function (elem, i, arr) {
             if (elem !== 'any' && parametrs.indexOf(elem) === -1) {
-              aaa.push(false);
+              arrayToParce.push(false);
             } else {
-              aaa.push(elem);
+              arrayToParce.push(elem);
             }
           });
-          if (!aaa.includes(false)) {
+          if (!arrayToParce.includes(false)) {
             parsePin(obj);
           }
         });
