@@ -73,7 +73,7 @@ window.showCard = function (item, obj) {
     }
 
     item.setAttribute('aria-pressed', true);
-}
+  };
   createDialog();
   var close = newDialog.querySelector('.dialog__close');
 

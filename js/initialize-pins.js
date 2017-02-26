@@ -7,7 +7,7 @@ window.initializePins = (function () {
 
   var ENTER_KEY_CODE = 13;
 
-  //функция рандоммизации
+  // функция рандоммизации
   var getRandomElement = function (array) {
     return array[Math.floor(Math.random() * array.length)];
   };
@@ -20,7 +20,7 @@ window.initializePins = (function () {
     return randomElem;
   };
 
-  //функция отрисовки
+  // функция отрисовки
   var parsePin = function (element) {
     var elementToClone = pinTemplate.content.querySelector('div.pin');
     var pin = elementToClone.cloneNode(true);
@@ -34,19 +34,19 @@ window.initializePins = (function () {
     pin.setAttribute('id', similarApartments.indexOf(element));
   };
 
-  //функция удаления пинов
+  // функция удаления пинов
   var deletePins = function () {
     var pinsForDelete = pinMap.querySelectorAll('.templated-pin');
     for (var i = 0; i < pinsForDelete.length; i++) {
-      deletePin(pinsForDelete[i])
+      deletePin(pinsForDelete[i]);
     }
   };
 
   var deletePin = function (node) {
     pinMap.removeChild(node);
-  }
+  };
 
-  //получаем с сервера массив объявлений и отрисовываем 3 рандомных.
+  // получаем с сервера массив объявлений и отрисовываем 3 рандомных.
   window.load('https://intensive-javascript-server-pedmyactpq.now.sh/keksobooking/data', function (evt) {
     similarApartments = JSON.parse(evt);
     var parsedElements = [];
@@ -57,7 +57,7 @@ window.initializePins = (function () {
         elementToParce = getRandomElementExcept(similarApartments, parsedElements);
       }
       parsedElements.push(elementToParce);
-    };
+    }
     for (i = 0; i < parsedElements.length; i++) {
       parsePin(parsedElements[i]);
     }
@@ -69,7 +69,7 @@ window.initializePins = (function () {
 
     curTarget: null,
 
-    //обработчик на клик по пину
+    // обработчик на клик по пину
     mapHandlerClick: function () {
       pinMap.addEventListener('click', function (evt) {
         var target = evt.target.parentNode;
@@ -79,7 +79,7 @@ window.initializePins = (function () {
       });
     },
 
-    //обработчик на клавиатуру по пину
+    // обработчик на клавиатуру по пину
     mapHandlerKeydown: function () {
       pinMap.addEventListener('keydown', function (evt) {
         if (evt && evt.keyCode === ENTER_KEY_CODE) {
@@ -95,7 +95,7 @@ window.initializePins = (function () {
       });
     },
 
-    //фильтрация массива по заданным параметрам
+    // фильтрация массива по заданным параметрам
     filterChangeHandler: function () {
       var checkBoxes = filterField.querySelectorAll('input');
       var fields = filterField.querySelectorAll('select');
@@ -104,7 +104,7 @@ window.initializePins = (function () {
       filterField.addEventListener('change', function (evt) {
         var filtresValues = [];
         deletePins();
-        fields.forEach(function(element, index, arr) {
+        fields.forEach(function (element, index, arr) {
           filtresValues.push(element.value);
         });
         checkBoxes.forEach(function (elem, i, arr) {
@@ -114,28 +114,26 @@ window.initializePins = (function () {
             filtresValues.push('any');
           }
         });
-        console.log(filtresValues);
 
-        var filtredArray = similarApartments.map(function(obj) {
-          console.log(obj);
+        similarApartments.map(function (obj) {
           var parametrs = [];
-          parametrs.push('' + obj.offer.type.valueOf())
+          parametrs.push('' + obj.offer.type.valueOf());
           if (obj.offer.price < 10000) {
-              var price = 'low';
-            } else if (obj.offer.price > 50000) {
-              var price = 'hight';
-            } else {
-              var price = 'middle';
-            };
+            var price = 'low';
+          } else if (obj.offer.price > 50000) {
+            price = 'hight';
+          } else {
+            price = 'middle';
+          }
           parametrs.push(price);
-          parametrs.push('' + obj.offer.rooms.valueOf())
-          parametrs.push('' + obj.offer.guests.valueOf())
+          parametrs.push('' + obj.offer.rooms.valueOf());
+          parametrs.push('' + obj.offer.guests.valueOf());
           var features = obj.offer.features.valueOf();
           features.forEach(function (elem, i) {
             parametrs.push(elem);
-          })
+          });
           var aaa = [];
-          filtresValues.forEach(function(elem, i, arr) {
+          filtresValues.forEach(function (elem, i, arr) {
             if (elem !== 'any' && parametrs.indexOf(elem) === -1) {
               aaa.push(false);
             } else {
@@ -143,13 +141,13 @@ window.initializePins = (function () {
             }
           });
           if (!aaa.includes(false)) {
-            parsePin(obj)
+            parsePin(obj);
           }
-        })
-      })
+        });
+      });
 
     }
-  }
+  };
 
   return initializeObject;
 })();
