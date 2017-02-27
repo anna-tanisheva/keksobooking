@@ -69,6 +69,8 @@ window.initializePins = (function () {
 
     curTarget: null,
 
+    dialog: null,
+
     // обработчик на клик по пину
     mapHandlerClick: function () {
       pinMap.addEventListener('click', function (evt) {

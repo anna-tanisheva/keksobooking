@@ -10,11 +10,11 @@ window.useFields = function () {
     element.min = value;
   };
 
-  var synchronizeFields = function (node1, node2, valuesArray1, valuesArray2, functionName) {
+  var synchronizeFields = function (node1, node2, valuesArray1, valuesArray2, syncAttributes) {
     node1.addEventListener('change', function () {
       for (var j = 0; j < valuesArray1.length; j++) {
         if (node1.value === valuesArray1[j]) {
-          functionName(node2, valuesArray2[j]);
+          syncAttributes(node2, valuesArray2[j]);
         }
       }
     });

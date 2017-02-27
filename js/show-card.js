@@ -1,5 +1,4 @@
 'use strict';
-window.dialog = null;
 
 window.showCard = function (item, obj) {
   var ENTER_KEY_CODE = 13;
@@ -14,9 +13,9 @@ window.showCard = function (item, obj) {
     }
   };
 
-  if (window.dialog !== null) {
-    closeDialog(window.dialog);
-    window.dialog = null;
+  if (window.initializePins.dialog !== null) {
+    closeDialog(window.initializePins.dialog);
+    window.initializePins.dialog = null;
   }
 
   item.classList.add('pin--active');
@@ -82,8 +81,8 @@ window.showCard = function (item, obj) {
     if (typeof window.initializePins.callBack === 'function') {
       window.initializePins.callBack();
     }
-    if (window.dialog !== null) {
-      window.dialog = null;
+    if (window.initializePins.dialog !== null) {
+      window.initializePins.dialog = null;
     }
   });
 
@@ -93,11 +92,11 @@ window.showCard = function (item, obj) {
       if (typeof window.initializePins.callBack === 'function') {
         window.initializePins.callBack();
       }
-      if (window.dialog !== null) {
-        window.dialog = null;
+      if (window.initializePins.dialog !== null) {
+        window.initializePins.dialog = null;
       }
     }
   });
 
-  window.dialog = newDialog;
+  window.initializePins.dialog = newDialog;
 };
